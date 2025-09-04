@@ -13,15 +13,6 @@ import {
 import { Project } from "@/entities";
 
 
-
-  // if (!queryClient.getQueryData([styleGuidesApi.baseKey])) {
-  //   await queryClient.prefetchQuery({
-  //     queryKey: [styleGuidesApi.baseKey],
-  //     queryFn: getStyleGuidesAction,
-  //   });
-  // }
-
-
 export default async function HomePage({params }: { params: { projectId: string }}) {
 
 	const { projectId } = await params;

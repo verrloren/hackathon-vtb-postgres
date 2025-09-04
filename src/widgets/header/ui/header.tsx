@@ -71,17 +71,6 @@ export function Header() {
             </DropdownMenuItem>
 
             <DropdownMenuItem className="hover:bg-black cursor-pointer">
-              <Link
-                className="w-full flex items-center justify-center"
-                href="/styleguides"
-              >
-                <Button variant="ghost" className="w-full text-neutral-400">
-                  Style Guides
-                </Button>
-              </Link>
-            </DropdownMenuItem>
-
-            <DropdownMenuItem className="hover:bg-black cursor-pointer">
               <Button
                 variant="ghost"
                 className="w-full text-neutral-400"

@@ -15,12 +15,6 @@ export function MainNav() {
         className="text-lg text-white/80 font-ibmPlexMono hover:text-white transition-colors"
         href="/projects"
       >
-        Style Guides
-      </Link>
-      <Link
-        className="text-lg text-white/80 font-ibmPlexMono hover:text-white transition-colors"
-        href="/projects"
-      >
         Projects
       </Link>
     </div>

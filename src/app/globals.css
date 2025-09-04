@@ -184,13 +184,7 @@ html, body {
   background-clip: text;
   color: transparent;
 }
-.text-radial-gradient-style-guide {
-  background: radial-gradient(circle, #FAAE82, #7546CC);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
+
 @layer base {
   :root {
 		--radius: 0.5rem;
@@ -198,7 +192,6 @@ html, body {
 }
 
 
-/* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 12px; /* Width of the scrollbar */
   height: 12px; /* Height of the scrollbar */

@@ -16,7 +16,7 @@ export function Logo() {
 			className="text-2xl 2xl:text-2xl text-white/40 font-ibmPlexMono hover:text-white/70 pr-2 
 			transition-colors"
 				>
-				evrz
+				VTB
 			</Link>
     </motion.div>
   );

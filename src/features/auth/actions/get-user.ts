@@ -2,7 +2,6 @@
 
 import { ResponseDto } from "@/shared";
 
-
  export const getUser = async () => {
 		try {
 			const result = await fetch(`${process.env.BACKEND_API_URL}/api/users`, {

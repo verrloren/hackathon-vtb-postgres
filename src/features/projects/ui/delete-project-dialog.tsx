@@ -79,7 +79,7 @@ export function DeleteProjectDialog({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
-            className={`h-12 py-2 px-2 border border-black/90 hover:border-white shadow-none transition-colors 
+            className={`h-12 py-2 px-2 border border-black/90 hover:border-white shadow-none transition-colors text-neutral-200
 						${wfull === "wfull" ? "w-full" : "w-12"} 
 						${
               border === "none"

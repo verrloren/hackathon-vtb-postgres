@@ -44,14 +44,6 @@ export function LoginForm() {
           toast.error(`${success}`);
           return;
         }
-					// await queryClient.prefetchQuery({
-					// 	queryKey: [projectsApi.baseKey],
-					// 	queryFn: getProjectsAction,
-					// });
-					// await queryClient.prefetchQuery({
-					// 	queryKey: [styleGuidesApi.baseKey],
-					// 	queryFn: getStyleGuidesAction,
-					// });
 					toast.success("Login successful!");
           router.push("/");
         

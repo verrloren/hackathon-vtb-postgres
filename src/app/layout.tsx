@@ -20,7 +20,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "evrz",
+  title: "vtb",
   description: "Developer tools for modern web development.",
 };
 

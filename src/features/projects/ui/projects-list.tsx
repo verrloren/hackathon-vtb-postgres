@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
-import { GitBranch, GitCommit } from "lucide-react";
-import { DotsVerticalIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
+import { DotsVerticalIcon } from "@radix-ui/react-icons";
 
 import {
   DropdownMenu,
@@ -143,26 +142,22 @@ export function ProjectsList() {
             <div className="w-full flex items-start gap-x-8 mt-2">
               {/* GIT SECTION  */}
               <div className="pt-4 flex flex-col items-start gap-y-2">
-                <div className="w-full h-6 bg-neutral-900 rounded-xl flex justify-center items-center">
+                {/* <div className="w-full h-6 bg-neutral-900 rounded-xl flex justify-center items-center">
                   <p className="flex items-center  gap-x-2 text-sm text-neutral-400">
-                    <GitHubLogoIcon height={14} width={14} />
-                    repository
+                    2 tables
                   </p>
-                </div>
-                <p className="flex items-center gap-x-2 text-sm text-neutral-600">
-                  <GitCommit size={18} />
-                  last commit
+                </div> */}
+                <p className="flex items-center gap-x-2 text-sm text-neutral-400">
+                  2 tables
                 </p>
-                <p className="flex items-center gap-x-2 text-sm text-neutral-600">
-                  <GitBranch size={14} />
-                  current branch
+                <p className="flex items-center gap-x-2 text-sm text-neutral-400">
+                  14 versions
+                </p>1
+                <p className="flex items-center gap-x-2 text-sm text-green-700">
+                  +15% queries speed increasement
                 </p>
               </div>
 
-              {/* CURRENT STYLEGUIDE  */}
-              <div className="pt-4 flex flex-col items-start gap-y-2">
-                <h5 className="text-neutral-400">Styleguide</h5>
-              </div>
             </div>
 						
 						{/* DROPDOWN */}

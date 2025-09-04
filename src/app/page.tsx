@@ -1,7 +1,6 @@
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 import { Container, getQueryClient, SpherePurple, PageHeader, PageContainer } from "@/shared";
-import { getStyleGuidesAction, styleGuidesApi } from "@/features/styleguides";
 import { getProjectsAction, ProjectsList, projectsApi } from "@/features/projects";
 
 
@@ -13,10 +12,6 @@ export default async function HomePage() {
 			queryKey: [projectsApi.baseKey],
 			queryFn: getProjectsAction,
 		}),
-		queryClient.prefetchQuery({
-			queryKey: [styleGuidesApi.baseKey],
-			queryFn: getStyleGuidesAction,
-		}),
 	]);
 
   const dehydratedState = dehydrate(queryClient);
@@ -27,7 +22,7 @@ export default async function HomePage() {
 
       <Container>
          <div className="w-full pt-40 sm:pt-44 md:pt-48 lg:pt-52 2xl:pt-72">
-           <PageHeader href="/new-project" header="Projects" buttonText="Create project" />
+           <PageHeader header="Projects" buttonText="Create project" />
 
            <div className="w-full relative flex-center pt-8 xl:pt-16 gap-y-6 md:gap-y-16 xl:gap-y-20 pb-20">
 						<HydrationBoundary state={dehydratedState}>

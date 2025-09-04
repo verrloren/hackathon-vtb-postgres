@@ -18,20 +18,7 @@ export const RegisterSchema = z.object({
 
 export const createProjectSchema = z.object({
 	projectName: z.string().min(1, "Project name is required"),
-	styleGuide: z.string().min(1, "Style guide is required"),
 });
-
-export const createStyleGuideSchema = z.object({
-	styleGuideName: z.string().min(1, "Style Guide name is required"),
-	architectureErrors: z.string().optional().or(z.literal('architectureErrors')),
-	packageErrors: z.string().optional().or(z.literal('packageErrors')),
-	structureErrors: z.string().optional().or(z.literal('structureErrors')),
-	namingErrors: z.string().optional().or(z.literal('namingErrors')),
-	styleErrors: z.string().optional().or(z.literal('styleErrors')),
-	standartsErrors: z.string().optional().or(z.literal('standartsErrors')),
-});
-
 
 
 export type CreateProjectFormData = z.infer<typeof createProjectSchema>;
-export type CreateStyleGuideFormData = z.infer<typeof createStyleGuideSchema>;

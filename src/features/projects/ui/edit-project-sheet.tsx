@@ -65,7 +65,7 @@ export function EditProjectSheet({ projectId, projectName, bg, border, text, rou
     <Sheet >
       <SheetTrigger asChild>
         <Button
-          className={`h-12 py-2 px-2 shadow-none transition-colors 
+          className={`h-12 py-2 px-2 shadow-none transition-colors text-neutral-200
 						${wfull === "wfull" ? "w-full" : "w-12"}
 						${border === "none" ? "border-none" : "border border-black/90 hover:border-white"}
 						${bg === "black" ? "bg-black/90 hover:bg-black/90" : "bg-neutral-950"} 

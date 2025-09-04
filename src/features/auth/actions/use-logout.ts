@@ -17,7 +17,6 @@ export const useLogout = () => {
       const result = await logout();
       if (result.success) {
         queryClient.removeQueries({ queryKey: ['projects'] });
-        queryClient.removeQueries({ queryKey: ['styleguides'] });
         router.push('/auth/login');
         router.refresh();
       } else {

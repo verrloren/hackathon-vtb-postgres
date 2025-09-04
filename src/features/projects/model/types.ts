@@ -1,4 +1,4 @@
-import { Project, StyleGuide } from "@/entities";
+import { Project } from "@/entities";
 
 export type LoginResponse = {
   success: boolean;
@@ -18,6 +18,3 @@ export interface UploadVariables {
   codelang_code: string;
 }
 
-export interface MutationContext {
-  previousStyleGuides: StyleGuide[] | undefined;
-}

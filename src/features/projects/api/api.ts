@@ -63,9 +63,8 @@ export const projectsApi = {
 
   createProject: async (formData: FormData, token: string | undefined) => {
 		const projectName = formData.get('projectName');
-		const styleGuide = formData.get('styleGuide');
 		const files = formData.get('files')
-     return jsonApiInstance<ResponseDto>(`/api/projects?name=${projectName}&guideline=${styleGuide}`, {
+     return jsonApiInstance<ResponseDto>(`/api/projects?name=${projectName}`, {
       method: 'POST',
 			headers: {
 				Authorization: `Bearer ${token}`,
