@@ -68,131 +68,35 @@ export function ProjectsList() {
 		</div>
 	)
 
+  // Prepare busy row and others
+  const enriched = projects.map((p) => ({
+    project: p,
+    status: projectStatuses[p.id] || p.project_status,
+  }));
+  const busy = enriched.filter(({ status }) => status === "pending" || status === "processing");
+  const others = enriched.filter(({ status }) => !(status === "pending" || status === "processing"));
+
   return (
     <motion.div
       variants={container}
       initial="hidden"
       animate="show"
-      className="w-full min-h-screen gap-x-4 md:gap-x-8 md:gap-y-8 gap-y-4
-			grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 "
+      className="w-full min-h-screen space-y-4"
     >
-      {projects.map((project) => {
-				const status = projectStatuses[project.id] || project.project_status;
-        return (
+      {busy.length > 0 && (
+        <div className="grid grid-flow-col auto-cols-fr gap-4 md:gap-6">
+          {busy.map(({ project, status }) => (
+            <ProjectCard key={project.id} project={project} status={status} />
+          ))}
+        </div>
+      )}
 
+      <div className="grid gap-x-4 md:gap-x-6 md:gap-y-6 gap-y-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 ">
+        {others.map(({ project, status }) => (
           <ProjectCard key={project.id} project={project} status={status} />
+        ))}
+      </div>
 
-    // PREVIOUS PROJECT CARD
-		//       <motion.div
-    //         variants={item}
-    //         key={project.id}
-    //         className={`relative min-w-40 min-h-48 border rounded-2xl 
-    //           hover:border-neutral-400 transition-colors px-8 py-8 
-    //           ${status === "pending" || status === "processing" ? "bg-[#080808]" : "bg-neutral-950"}
-    //           ${status === "pending" || status === "processing" ? "border-none" : "border-neutral-600"}
-    //           ${status === "pending" || status === "processing" ? "brightness-50" : "border-neutral-800"}
-    //           ${status === "error" ? "border-red-800" : ""}
-    //         `}
-    //       >
-
-    //         {/* PROJECT NAME */}
-    //         <div className="flex flex-row items-center gap-x-3">
-    //           <Link
-    //             href={status !== "pending" && status !== "processing" ? `/${project.id}` : ""}
-    //             onClick={(e) => {
-    //               if (status === "pending" || status === "processing") {
-    //                 e.preventDefault();
-    //                 return;
-    //               }
-    //               selectProject(project);
-    //             }}
-    //             className={`text-white text-3xl
-    //               ${status === "pending" || status === "processing" ? "hover:no-underline cursor-default" : "hover:underline cursor-pointer"}
-    //               ${status === "error" ? "text-red-500" : ""}
-    //             `}
-    //           >
-    //             {project.name}
-    //           </Link>
-
-		// 					{/* STATUS */}
-    //           {status === "pending" || status === "processing" ? (
-    //             <motion.div
-    //               animate={{ rotate: 360 }}
-    //               transition={spinTransition}
-    //               className="w-3 h-3 mt-[7px] rounded-full border-2 border-neutral-600 border-t-transparent"
-    //             />
-    //           ) : status === "error" ? (
-    //             <div className="w-2 h-2 mt-[7px] rounded-full bg-red-600" />
-    //           ) : (
-    //             <div className="w-2 h-2 mt-[7px] rounded-full bg-green-600" />
-    //           )}
-    //           {status === "processing" && (
-    //             <span className="text-xs text-neutral-400">Processing...</span>
-    //           )}
-    //         </div>
-
-    //         <div className="w-full flex items-start gap-x-8 mt-2">
-    //           {/* GIT SECTION  */}
-    //           <div className="pt-4 flex flex-col items-start gap-y-2">
-    //             {/* <div className="w-full h-6 bg-neutral-900 rounded-xl flex justify-center items-center">
-    //               <p className="flex items-center  gap-x-2 text-sm text-neutral-400">
-    //                 2 tables
-    //               </p>
-    //             </div> */}
-    //             <p className="flex items-center gap-x-2 text-sm text-neutral-400">
-    //               2 tables
-    //             </p>
-    //             <p className="flex items-center gap-x-2 text-sm text-neutral-400">
-    //               14 versions
-    //             </p>1
-    //             <p className="flex items-center gap-x-2 text-sm text-green-700">
-    //               +15% queries speed increasement
-    //             </p>
-    //           </div>
-
-    //         </div>
-						
-		// 				{/* DROPDOWN */}
-    //         <div className="absolute top-6 right-4 ">
-    //           <DropdownMenu modal={false}>
-    //             <DropdownMenuTrigger>
-    //               <DotsVerticalIcon
-    //                 width={18}
-    //                 height={18}
-    //                 className="text-neutral-400 hover:text-white transition-colors"
-    //               />
-    //             </DropdownMenuTrigger>
-
-    //             <DropdownMenuContent 
-		// 						className="bg-neutral-950 w-full border border-neutral-800  rounded-xl">
-    //               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-    //                 <EditProjectSheet
-    //                   projectId={project.id}
-    //                   projectName={project.name}
-    //                   bg="dark"
-    //                   border="none"
-    //                   wfull="wfull"
-    //                   text="Edit"
-    //                   rounded="md"
-    //                 />
-    //               </DropdownMenuItem>
-
-    //               <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-    //                 <DeleteProjectDialog
-    //                   projectId={project.id}
-    //                   bg="dark"
-    //                   border="none"
-    //                   wfull="wfull"
-    //                   text="Delete"
-    //                   rounded="md"
-    //                 />
-    //               </DropdownMenuItem>
-    //             </DropdownMenuContent>
-    //           </DropdownMenu>
-    //         </div>
-    //       </motion.div>
-        );
-      })}
     </motion.div>
   );
 }
