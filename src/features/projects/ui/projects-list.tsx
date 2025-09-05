@@ -73,8 +73,8 @@ export function ProjectsList() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="w-full min-h-screen gap-x-4 gap-y-4
-			grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 "
+      className="w-full min-h-screen gap-x-4 md:gap-x-8 md:gap-y-8 gap-y-4
+			grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 "
     >
       {projects.map((project) => {
 				const status = projectStatuses[project.id] || project.project_status;

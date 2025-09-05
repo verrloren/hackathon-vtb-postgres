@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 
 import { CardBody, CardContainer, CardItem } from "./3d-card";
+import styles from "./project-card.module.css";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,14 +32,10 @@ export function ProjectCard({ project, status }: ProjectCardProps) {
   return (
     <CardContainer className="inter-var w-full" containerClassName="py-0 my-0">
       <CardBody
-        className={`relative group/card w-full h-full rounded-2xl px-8 py-8 border 
-          ${isBusy ? "bg-[#080808] border-none brightness-50" : "bg-neutral-950 border-neutral-800"}
-          ${isError ? "border-red-800" : ""}
-        `}
-      >
+        className={`relative group/card w-full h-full rounded-2xl px-8 py-8 ${styles.glass}`}>
         <CardItem translateZ={50} className="flex flex-row items-center gap-x-3">
           <Link
-            href={!isBusy ? `/${project.id}` : ""}
+            href={`/${project.id}`}
             onClick={(e) => {
               if (isBusy) {
                 e.preventDefault();

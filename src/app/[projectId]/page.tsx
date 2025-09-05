@@ -45,9 +45,11 @@ export default async function HomePage({params }: { params: { projectId: string 
         <HydrationBoundary state={dehydratedState}>
           <div className="w-full relative flex flex-col justify-center pt-44 md:pt-52 lg:pt-60 2xl:pt-72 gap-y-6 md:gap-y-16 xl:gap-y-20">
 
-            <div className="w-full flex-center-col md:justify-between md:flex-row gap-y-16">
-              <ProjectName projectName={project.name} />
-              <ActionButtons bg="black" rounded="full" redirect={true} />
+            <div className={`w-full rounded-2xl px-6 md:px-8 py-5`}>
+              <div className="w-full flex-center-col md:justify-between md:flex-row gap-y-6 md:gap-y-10">
+                <ProjectName projectName={project.name} />
+                <ActionButtons bg="black" rounded="full" redirect={true} />
+              </div>
             </div>
 
             <div className="h-full w-full">

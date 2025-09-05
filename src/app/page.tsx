@@ -18,7 +18,7 @@ export default async function HomePage() {
 
   return (
     <PageContainer>
-      <SpherePurple />
+				<SpherePurple />
 
       <Container>
          <div className="w-full pt-40 sm:pt-44 md:pt-48 lg:pt-52 2xl:pt-72">
