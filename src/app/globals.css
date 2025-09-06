@@ -57,9 +57,6 @@ html, body {
 	justify-content: space-between;
 }
 
-
-
-
 /* .radial-ellipse {	
 	background: var(--radial-ellipse-background);
 	border-radius: 50%;
@@ -107,7 +104,6 @@ html, body {
   border-radius: 50%;
 }
 
-
 .noise:before {
   content: "";
   background-color: transparent;
@@ -122,8 +118,6 @@ html, body {
   height: 100%;
 }
 
-
-
 .radial-ellipse-upload-project-files {
   box-shadow: inset -10px -10px 30px rgba(0, 0, 0, 0.4), inset 10px 10px 30px rgba(255, 255, 255, 0.2);
 	animation: saturation 5s ease-in-out;
@@ -133,7 +127,6 @@ html, body {
 	animation: saturation 5s ease-in-out;
 }
  */
-
 
 .radial-ellipse-upload {
   position: relative;
@@ -189,8 +182,10 @@ html, body {
   :root {
 		--radius: 0.5rem;
 	}
+  .theme {
+		--animate-shiny-text: shiny-text 8s infinite;
+	}
 }
-
 
 ::-webkit-scrollbar {
   width: 12px; /* Width of the scrollbar */
@@ -305,4 +300,15 @@ html, body {
   100% {
     opacity: 0;
   }
+}
+
+@theme inline {
+  @keyframes shiny-text {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shiny-width)) 0;
+		}
+  30%, 60% {
+    background-position: calc(100% + var(--shiny-width)) 0;
+		}
+	}
 }

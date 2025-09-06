@@ -32,11 +32,11 @@ export function ProjectCard({ project, status }: ProjectCardProps) {
   return (
     <CardContainer className="inter-var w-full" containerClassName="py-0 my-0">
       <CardBody
-        className={`relative group/card w-full h-full rounded-2xl px-8 py-8 ${styles.glass}`}>
+        className={`relative group/card w-full h-full rounded-2xl px-8 py-6 ${styles.glass}`}>
         {isBusy ? (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="flex flex-row items-center gap-x-3">
-              <span className={`text-lg lg:text-xl text-neutral-600 ${isError ? "text-red-500" : ""}`}>
+              <span className={`text-lg lg:text-lg text-neutral-600 ${isError ? "text-red-500" : ""}`}>
                 {project.name}
               </span>
               <motion.div
