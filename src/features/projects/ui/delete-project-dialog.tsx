@@ -21,6 +21,7 @@ import {
   useProjectsStore,
   useDeleteProjectMutation,
 } from "@/features/projects";
+import styles from "@/features/projects/ui/project-card.module.css";
 
 interface DeleteProjectDialogProps {
   projectId?: number;
@@ -81,20 +82,23 @@ export function DeleteProjectDialog({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
-            className={`h-12 py-2 px-2 border border-black/90 hover:border-white shadow-none transition-colors hover:text-white
+						className={`h-12 py-2 px-2  hover:border-white  shadow-none text-white transition-colors hover:text-white 
 						${wfull === "wfull" ? "w-full" : "w-12"} 
-						${
-              border === "none"
-                ? "border-none"
-                : "border border-black/90 hover:border-white"
-            }
+						${border === "none" ? "border-none" : `border border-black/90 hover:border-white`}
 						${glassy ? "hover:bg-transparent bg-transparent" : " bg-transparent hover:bg-white/5"} 
 						${bg === "black" ? "bg-black/90 hover:bg-black/90" : "bg-transparent"} 
-						${rounded === "full" ? "rounded-full" : "rounded-lg"} 
+						${rounded === "full" ? `rounded-full  ${styles.glassRound} text-white` : "rounded-lg text-neutral-300 hover:text-white"} 
 					`}
+					//           className={`h-12 w-12 py-2 px-2 shadow-none flex items-center justify-center transition-colors text-neutral-200 bg-transparent text-sm ${styles.glassRound}
+					// 	${wfull === "wfull" ? "w-full" : "w-12"}
+					// 	${border === "none" ? "border-none" : "border border-black/90 hover:border-white"}
+					// 	${bg === "black" ? "hover:bg-black/90 bg-black/80" : " bg-transparent hover:bg-white/5"} 
+					// 	${glassy ? "hover:bg-transparent bg-transparent" : " bg-transparent hover:bg-white/5"} 
+					// 	${rounded === "full" ? "rounded-full " : "rounded-lg"}
+					// `}
           >
             <TrashIcon className="text-white peer-hover:text-white peer-hover:rotate-90" />
-            <span className="text-base text-neutral-200">{text ?? text}</span>
+            <span className="text-base text-neutral-200 pl-1">{text ?? text}</span>
           </Button>
         </DialogTrigger>
 

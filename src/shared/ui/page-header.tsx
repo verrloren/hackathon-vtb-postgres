@@ -1,14 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { AiOutlinePlus } from "react-icons/ai";
 
-import { Button, Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DialogClose, Input, Label } from "@/shared";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+  Input,
+  Label,
+} from "@/shared";
 
 interface PageHeaderProps {
-	header: string;
-	buttonText: string;
+  header: string;
+  buttonText: string;
 }
 
 export function PageHeader({ header, buttonText }: PageHeaderProps) {
@@ -41,11 +52,15 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
           </Button>
         </DialogTrigger>
 
-        <DialogContent           className="w-full py-8 bg-neutral-950 border-l-neutral-800 rounded-2xl
+        <DialogContent
+          className="w-full py-8 bg-neutral-950 border-l-neutral-800 rounded-2xl
           flex flex-col justify-center overflow-hidden border-neutral-800
-          px-8 gap-y-12">
+          px-8 gap-y-12"
+        >
           <DialogHeader>
-            <DialogTitle className="text-4xl">Create Project</DialogTitle>
+            <DialogTitle className="text-white text-5xl text-center">
+              Create Project
+            </DialogTitle>
           </DialogHeader>
 
           <div className="space-y-4">
@@ -53,7 +68,7 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
               <Label htmlFor="project-name">Project name</Label>
               <Input
                 id="project-name"
-								className="bg-neutral-900 text-white border-neutral-800 font-poppins rounded-xl placeholder:text-neutral-600 focus:bg-neutral-900 focus:border-neutral-600"
+                className="bg-neutral-900 text-white border-neutral-800 font-poppins rounded-xl placeholder:text-neutral-600 focus:bg-neutral-900 focus:border-neutral-600"
                 placeholder="My awesome project"
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
@@ -64,7 +79,7 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
               <Label htmlFor="connection-string">Connection string</Label>
               <Input
                 id="connection-string"
-								className="bg-neutral-900 text-white border-neutral-800 font-poppins rounded-xl placeholder:text-neutral-600 focus:bg-neutral-900 focus:border-neutral-600"
+                className="bg-neutral-900 text-white border-neutral-800 font-poppins rounded-xl placeholder:text-neutral-600 focus:bg-neutral-900 focus:border-neutral-600"
                 placeholder="postgresql://user:pass@host:5432/db"
                 value={connectionString}
                 onChange={(e) => setConnectionString(e.target.value)}
@@ -91,8 +106,7 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
         </DialogContent>
       </Dialog>
 
-
-        {/* <DialogContent
+      {/* <DialogContent
           className="w-full py-8 bg-neutral-950 border-l-neutral-800 rounded-2xl
           flex flex-col justify-center overflow-hidden border-neutral-800
           px-8 gap-y-12"

@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 import { Button } from "@/shared";
 import { useProjectsStore, getMD } from "@/features/projects";
+import styles from "@/features/projects/ui/project-card.module.css";
 
 export function ButtonMD() {
   const [MDLoading, setMDLoading] = useState(false);
@@ -53,13 +54,13 @@ export function ButtonMD() {
     <Button
       onClick={handleMDDownload}
       disabled={MDLoading || !selectedProject}
-      className="w-12 h-12 py-2 px-2 bg-black/90 hover:bg-black/90 rounded-full border border-black/90 
-					hover:border-white shadow-none transition-colors"
+      className={`w-12 h-12 py-2 px-2 bg-black/90 hover:bg-black/90 rounded-full border border-black/90 
+					hover:border-white shadow-none transition-colors ${styles.glassRound}`}
     >
       {MDLoading ? (
         <div className="animate-spin">⌛</div>
       ) : (
-        <FaMarkdown className="text-white" /> // ✅ Use markdown icon
+        <FaMarkdown className="text-white" /> 
       )}
     </Button>
   );

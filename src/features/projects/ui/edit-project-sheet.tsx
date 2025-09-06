@@ -16,6 +16,7 @@ import {
 	Button
 } from "@/shared";
 import { useProjectsStore, useUpdateProject } from "@/features/projects";
+import styles from "@/features/projects/ui/project-card.module.css";
 
 
 interface SheetEditProps {
@@ -66,15 +67,15 @@ export function EditProjectSheet({ projectId, projectName, bg, border, text, rou
     <Sheet >
       <SheetTrigger asChild>
         <Button
-          className={`h-12 py-2 px-2 shadow-none transition-colors text-neutral-200 bg-transparent text-sm
-						${wfull === "wfull" ? "w-full" : "w-12"}
-						${border === "none" ? "border-none" : "border border-black/90 hover:border-white"}
-						${bg === "black" ? "hover:bg-black/90 bg-black/80" : " bg-transparent hover:bg-white/5"} 
+						className={`h-12 py-2 px-2  hover:border-white  shadow-none  transition-colors hover:text-white 
+						${wfull === "wfull" ? "w-full" : "w-12"} 
+						${border === "none" ? "border-none" : `border border-black/90 hover:border-white`}
 						${glassy ? "hover:bg-transparent bg-transparent" : " bg-transparent hover:bg-white/5"} 
-						${rounded === "full" ? "rounded-full" : "rounded-lg"} 
+						${bg === "black" ? "bg-black/90 hover:bg-black/90" : "bg-transparent"} 
+						${rounded === "full" ? `rounded-full  ${styles.glassRound} text-white` : "rounded-lg text-neutral-300 hover:text-white"} 
 					`}
         >
-          <AiOutlineEdit  /> <span className="text-base">{text ?? text}</span>
+          <AiOutlineEdit className="text-center" /> <span className="text-base pl-1">{text ?? text}</span>
         </Button>
       </SheetTrigger>
 

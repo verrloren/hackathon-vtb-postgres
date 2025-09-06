@@ -8,6 +8,7 @@ export const getProjectsAction = async (): Promise<Project[]> => {
   try {
     const { token } = await getToken();
     const projects = await projectsApi.getProjects(token);
+		console.log('Projects fetched:', projects);
     return projects;
   } catch (error) {
     console.error("Failed to fetch projects:", error);

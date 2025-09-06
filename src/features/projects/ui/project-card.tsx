@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 import { DotsVerticalIcon } from "@radix-ui/react-icons";
 
 import { CardBody, CardContainer, CardItem } from "./3d-card";
-import styles from "./project-card.module.css";
+import styles from "@/features/projects/ui/project-card.module.css";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -106,6 +106,7 @@ export function ProjectCard({ project, status }: ProjectCardProps) {
                     <DeleteProjectDialog
                       projectId={project.id}
                       border="none"
+											bg="transparent"
                       wfull="wfull"
                       text="Delete"
                       rounded="md"
