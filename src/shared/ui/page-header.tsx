@@ -46,7 +46,7 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
 
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="h-14 font-normal px-8">
+          <Button className="h-14 font-normal px-8 gap-x-4">
             <AiOutlinePlus />
             {buttonText}
           </Button>
