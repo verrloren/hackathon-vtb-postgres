@@ -7,8 +7,6 @@ export type LoginResponse = {
 };
 
 
-
-
 export interface ProjectsResponse {
   response: Project[];
 }

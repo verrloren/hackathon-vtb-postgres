@@ -1,22 +1,20 @@
-import { jsonApiInstance, ResponseDto } from "@/shared";
-import { ProjectsResponse } from "@/features/projects";
-import { Project } from "@/entities";
+import { jsonApiInstance, ResponseDto, Version } from "@/shared";
 
 
 
-export type ProjectStatus = 'pending' | 'processing' | 'success' | 'error';
+export type VersionStatus = 'pending' | 'processing' | 'success' | 'error';
 
-export interface ProjectStatusResponse {
-  response: Project;
+export interface VersionStatusResponse {
+  response: Version;
 }
 
 
-export const projectsApi = {
-  baseKey: "projects",
-  baseUrl: "/api/projects",
+export const versionsApi = {
+  baseKey: "version",
+  baseUrl: "/api/version",
 
-  getProjects: async (token: string | undefined) => {
-    const response = await jsonApiInstance<ProjectsResponse>("/api/projects", {
+  getVersions: async (token: string | undefined) => {
+    const response = await jsonApiInstance<VersionStatusResponse>("/api/version", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -30,7 +28,7 @@ export const projectsApi = {
     return response.response;
   },
 
-  createProject: async (
+  createVersion: async (
     data: {
       connection_string: string;
       name: string;
@@ -40,7 +38,7 @@ export const projectsApi = {
     },
     token: string | undefined
   ) => {
-    return jsonApiInstance<ResponseDto>(`/api/projects`, {
+    return jsonApiInstance<ResponseDto>(`/api/version`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -50,12 +48,12 @@ export const projectsApi = {
     });
   },
 
-  updateProject: (
-    data: Partial<Project> & { id: number; name: string },
+  updateVersion: (
+    data: Partial<Version> & { id: number; name: string },
     token: string | undefined
   ) => {
     const { id, ...payload } = data as { id: number } & Record<string, unknown>;
-    return jsonApiInstance<ResponseDto>(`/api/projects?id=${id}`,
+    return jsonApiInstance<ResponseDto>(`/api/version?id=${id}`,
       {
         method: "PATCH",
         headers: {
@@ -67,11 +65,11 @@ export const projectsApi = {
     );
   },
 
-  deleteProject: (
-    data: Partial<Project> & { id: number },
+  deleteVersion: (
+    data: Partial<Version> & { id: number },
     token: string | undefined
   ) => {
-    return jsonApiInstance<ResponseDto>(`/api/projects`, {
+    return jsonApiInstance<ResponseDto>(`/api/version`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -85,8 +83,8 @@ export const projectsApi = {
 
 
 	
-	checkProjectStatus: async (projectId: number, token: string | undefined): Promise<ProjectStatusResponse> => {
-    return jsonApiInstance(`/api/projects?id=${projectId}`, {
+	checkVersionStatus: async (projectId: number, token: string | undefined): Promise<VersionStatusResponse> => {
+    return jsonApiInstance(`/api/version?id=${projectId}`, {
 			method: 'GET',
 			headers: {
 				Authorization: `Bearer ${token}`,

@@ -10,14 +10,13 @@ import {
   ActionButtons,
   ProjectsTable,
 } from "@/features/projects";
-import { Project } from "@/entities";
+import { Project as SharedProject } from "@/shared";
 
 
-export default async function HomePage({params }: { params: { projectId: string }}) {
+export default async function HomePage({ params }: { params: { projectId: string } }) {
 
-	const { projectId } = await params;
+	const { projectId } = params;
   const queryClient = getQueryClient();
-  const parsedProjectId = parseInt(projectId);
 
   if (!queryClient.getQueryData([projectsApi.baseKey])) {
     await queryClient.prefetchQuery({
@@ -26,8 +25,8 @@ export default async function HomePage({params }: { params: { projectId: string 
     });
   }
 
-  const projects = queryClient.getQueryData<Project[]>([projectsApi.baseKey]);
-  const project = projects?.find((p) => p.id === parsedProjectId);
+  const projects = queryClient.getQueryData<SharedProject[]>([projectsApi.baseKey]);
+  const project = projects?.find((p) => String(p.id) === projectId);
 
   if (!project) return <div className="text-white text-center mt-52 text-2xl">Project not found</div>
 
@@ -52,7 +51,7 @@ export default async function HomePage({params }: { params: { projectId: string 
               </div>
             </div>
 
-              <ProjectsTable />
+              <ProjectsTable tables={project.tables ?? []} />
           </div>
         </HydrationBoundary>
       </Container>
