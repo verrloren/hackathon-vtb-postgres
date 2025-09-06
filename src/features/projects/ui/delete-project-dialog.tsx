@@ -30,6 +30,7 @@ interface DeleteProjectDialogProps {
   rounded?: string;
   wfull?: string;
   redirect?: boolean;
+	glassy?: boolean;
 }
 
 export function DeleteProjectDialog({
@@ -40,6 +41,7 @@ export function DeleteProjectDialog({
   rounded,
   wfull,
   redirect,
+	glassy
 }: DeleteProjectDialogProps) {
   const selectedProject = useProjectsStore((state) => state.selectedProject);
   const { deleteProject } = useDeleteProjectMutation();
@@ -79,19 +81,20 @@ export function DeleteProjectDialog({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
-            className={`h-12 py-2 px-2 border border-black/90 hover:border-white shadow-none transition-colors text-neutral-200
+            className={`h-12 py-2 px-2 border border-black/90 hover:border-white shadow-none transition-colors hover:text-white
 						${wfull === "wfull" ? "w-full" : "w-12"} 
 						${
               border === "none"
                 ? "border-none"
                 : "border border-black/90 hover:border-white"
             }
-						${bg === "black" ? "bg-black/90 hover:bg-black/90" : "bg-neutral-950"} 
+						${glassy ? "hover:bg-transparent bg-transparent" : " bg-transparent hover:bg-white/5"} 
+						${bg === "black" ? "bg-black/90 hover:bg-black/90" : "bg-transparent"} 
 						${rounded === "full" ? "rounded-full" : "rounded-lg"} 
 					`}
           >
-            <TrashIcon className="text-white peer-hover:text-white peer-hover:rotate-90" />{" "}
-            {text ?? text}
+            <TrashIcon className="text-white peer-hover:text-white peer-hover:rotate-90" />
+            <span className="text-base text-neutral-200">{text ?? text}</span>
           </Button>
         </DialogTrigger>
 
@@ -101,7 +104,7 @@ export function DeleteProjectDialog({
           px-8 gap-y-12"
         >
           <DialogHeader>
-            <DialogTitle className="text-white text-6xl text-center">
+            <DialogTitle className="text-white text-5xl text-center">
               Are you sure?
             </DialogTitle>
           </DialogHeader>
@@ -110,17 +113,17 @@ export function DeleteProjectDialog({
             Deleting this project will permanently remove it from your account.
           </DialogDescription>
 
-          <DialogFooter className="flex flex-row items-center gap-x-8">
+          <DialogFooter className="flex flex-row items-center gap-x-4">
             <DialogClose
               id="dialog-close-button"
-              className="py-3 w-full text-xl bg-transparent border border-neutral-800 text-white font-poppins rounded-2xl z-40 hover:border-neutral-600 transition-colors hover:brightness-125"
+              className="py-3 w-full text-xl bg-transparent border border-neutral-800 hover:text-neutral-500 text-neutral-600 font-poppins rounded-2xl z-40 hover:border-neutral-800 transition-colors hover:brightness-125"
               type="submit"
             >
               Cancel
             </DialogClose>
             <Button
               disabled={!selectedProject}
-              className="py-6 w-full text-xl bg-red-600 text-white font-poppins rounded-2xl z-40 transition-colors hover:bg-red-500"
+              className="py-6 w-full text-xl bg-red-600/75 text-white font-poppins rounded-2xl z-40 transition-colors hover:bg-red-600/90 hover:border-red-500"
               type="submit"
               onClick={onDelete}
             >

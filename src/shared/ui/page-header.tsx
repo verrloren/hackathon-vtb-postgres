@@ -20,7 +20,7 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
       <h3 className="text-7xl lg:text-8xl 2xl:text-9xl text-white font-semibold">
         {header}
       </h3>
-        <Button className="h-14 font-normal ">
+        <Button className="h-14 font-normal px-8">
           <AiOutlinePlus />
           {buttonText}
         </Button>

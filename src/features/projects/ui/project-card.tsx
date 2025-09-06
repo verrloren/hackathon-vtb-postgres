@@ -36,7 +36,7 @@ export function ProjectCard({ project, status }: ProjectCardProps) {
         {isBusy ? (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="flex flex-row items-center gap-x-3">
-              <span className={`text-2xl text-neutral-600 ${isError ? "text-red-500" : ""}`}>
+              <span className={`text-lg lg:text-xl text-neutral-600 ${isError ? "text-red-500" : ""}`}>
                 {project.name}
               </span>
               <motion.div
@@ -58,17 +58,15 @@ export function ProjectCard({ project, status }: ProjectCardProps) {
                   }
                   selectProject(project);
                 }}
-                className={`text-3xl ${
+                className={`text-3xl 2xl:text-4xl ${
                   isBusy ? "hover:no-underline cursor-default" : "hover:underline cursor-pointer text-white"
                 } ${isError ? "text-red-500" : ""}`}
               >
                 {project.name}
               </Link>
 
-              {isError ? (
+              {isError && (
                 <div className="w-2 h-2 mt-[7px] rounded-full bg-red-600" />
-              ) : (
-                <div className="w-2 h-2 mt-[7px] rounded-full bg-green-600" />
               )}
               {status === "processing" && (
                 <span className="text-xs text-neutral-400">Processing...</span>
@@ -93,26 +91,25 @@ export function ProjectCard({ project, status }: ProjectCardProps) {
                     className="text-neutral-400 hover:text-white transition-colors"
                   />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-neutral-950 w-full border border-neutral-800 rounded-xl">
-                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                <DropdownMenuContent className={`${styles.glassDarker} w-full border bg-transparent border-neutral-800 rounded-xl`}>
+                  <DropdownMenuItem className="bg-transparent" onSelect={(e) => e.preventDefault()}>
                     <EditProjectSheet
                       projectId={project.id}
                       projectName={project.name}
-                      bg="dark"
                       border="none"
                       wfull="wfull"
                       text="Edit"
                       rounded="md"
-                    />
+											glassy={true}                    />
                   </DropdownMenuItem>
-                  <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                  <DropdownMenuItem className="hover:bg-none" onSelect={(e) => e.preventDefault()}>
                     <DeleteProjectDialog
                       projectId={project.id}
-                      bg="dark"
                       border="none"
                       wfull="wfull"
                       text="Delete"
                       rounded="md"
+											glassy={true}
                     />
                   </DropdownMenuItem>
                 </DropdownMenuContent>

@@ -26,9 +26,10 @@ interface SheetEditProps {
   text?: string;
   rounded?: string;
   wfull?: string;
+  glassy?: boolean;
 }
 
-export function EditProjectSheet({ projectId, projectName, bg, border, text, rounded, wfull}: SheetEditProps) {
+export function EditProjectSheet({ projectId, projectName, bg, border, text, rounded, glassy, wfull}: SheetEditProps) {
 
 
 	const { selectedProject} = useProjectsStore();
@@ -65,14 +66,15 @@ export function EditProjectSheet({ projectId, projectName, bg, border, text, rou
     <Sheet >
       <SheetTrigger asChild>
         <Button
-          className={`h-12 py-2 px-2 shadow-none transition-colors text-neutral-200
+          className={`h-12 py-2 px-2 shadow-none transition-colors text-neutral-200 bg-transparent text-sm
 						${wfull === "wfull" ? "w-full" : "w-12"}
 						${border === "none" ? "border-none" : "border border-black/90 hover:border-white"}
-						${bg === "black" ? "bg-black/90 hover:bg-black/90" : "bg-neutral-950"} 
+						${bg === "black" ? "hover:bg-black/90 bg-black/80" : " bg-transparent hover:bg-white/5"} 
+						${glassy ? "hover:bg-transparent bg-transparent" : " bg-transparent hover:bg-white/5"} 
 						${rounded === "full" ? "rounded-full" : "rounded-lg"} 
 					`}
         >
-          <AiOutlineEdit className="text-white" /> {text ?? text}
+          <AiOutlineEdit  /> <span className="text-base">{text ?? text}</span>
         </Button>
       </SheetTrigger>
 
