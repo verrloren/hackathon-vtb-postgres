@@ -52,9 +52,7 @@ export default async function HomePage({params }: { params: { projectId: string 
               </div>
             </div>
 
-            <div className="h-full w-full">
               <ProjectsTable />
-            </div>
           </div>
         </HydrationBoundary>
       </Container>

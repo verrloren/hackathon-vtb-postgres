@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import * as AccordionPrimitive from "./accordion";
 import { FileIcon, FolderIcon, FolderOpenIcon } from "lucide-react";
 import React, {
   createContext,
@@ -12,8 +13,8 @@ import React, {
 } from "react";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/shared";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { cn } from "@/lib/utils";
 
 type TreeViewElement = {
   id: string;
@@ -44,7 +45,7 @@ const useTree = () => {
   return context;
 };
 
-interface TreeViewComponentProps extends React.HTMLAttributes<HTMLDivElement> {}
+type TreeViewComponentProps = React.HTMLAttributes<HTMLDivElement>;
 
 type Direction = "rtl" | "ltr" | undefined;
 
@@ -164,7 +165,7 @@ const Tree = forwardRef<HTMLDivElement, TreeViewProps>(
               defaultValue={expandedItems}
               value={expandedItems}
               className="flex flex-col gap-1"
-              onValueChange={(value) =>
+              onValueChange={(value: string[]) =>
                 setExpandedItems((prev) => [...(prev ?? []), value[0]])
               }
               dir={dir as Direction}
@@ -201,8 +202,9 @@ const TreeIndicator = forwardRef<
 
 TreeIndicator.displayName = "TreeIndicator";
 
-interface FolderComponentProps
-  extends React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Item> {}
+type FolderComponentProps = React.ComponentPropsWithoutRef<
+  typeof AccordionPrimitive.Item
+>;
 
 type FolderProps = {
   expandedItems?: string[];
@@ -239,6 +241,8 @@ const Folder = forwardRef<
 
     return (
       <AccordionPrimitive.Item
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ref={ref as any}
         {...props}
         value={value}
         className="relative h-full overflow-hidden"
@@ -269,7 +273,7 @@ const Folder = forwardRef<
             className="ml-5 flex flex-col gap-1 py-1 rtl:mr-5"
             defaultValue={expandedItems}
             value={expandedItems}
-            onValueChange={(value) => {
+            onValueChange={(value: string[]) => {
               setExpandedItems?.((prev) => [...(prev ?? []), value[0]]);
             }}
           >
@@ -322,7 +326,10 @@ const File = forwardRef<
           direction === "rtl" ? "rtl" : "ltr",
           className,
         )}
-        onClick={() => selectItem(value)}
+        onClick={() => {
+          selectItem(value);
+          handleSelect?.(value);
+        }}
         {...props}
       >
         {fileIcon ?? <FileIcon className="size-4" />}
@@ -369,7 +376,7 @@ const CollapseButton = forwardRef<
   return (
     <Button
       variant={"ghost"}
-      className="absolute bottom-1 right-2 h-8 w-fit p-1"
+      className={cn("absolute bottom-1 right-2 h-8 w-fit p-1", className)}
       onClick={
         expandedItems && expandedItems.length > 0
           ? closeAll

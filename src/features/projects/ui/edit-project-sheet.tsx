@@ -84,7 +84,6 @@ export function EditProjectSheet({ projectId, projectName, bg, border, text, rou
 								flex flex-col justify-center overflow-hidden 
 								px-4 sm:px-20 md:px-20 xl:px-28 2xl:px-36
 								gap-y-12"
-								
       >
 				{/* sphere */}
 					<div className="radial-ellipse-dashboard w-full aspect-square

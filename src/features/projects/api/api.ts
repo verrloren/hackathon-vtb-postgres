@@ -30,7 +30,26 @@ export const projectsApi = {
     return response.response;
   },
 
-  // This means all ProjectDto fields are optional EXCEPT id
+  createProject: async (
+    data: {
+      connection_string: string;
+      name: string;
+      table_name: string;
+      table_schema: string; // will be hardcoded as ""
+      user_id?: string;
+    },
+    token: string | undefined
+  ) => {
+    return jsonApiInstance<ResponseDto>(`/api/projects`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "X-API-KEY": process.env.BACKEND_API_KEY as string,
+      },
+      json: data,
+    });
+  },
+
   updateProject: (
     data: Partial<Project> & { id: number; name: string },
     token: string | undefined
@@ -61,19 +80,7 @@ export const projectsApi = {
   },
 
 
-  createProject: async (formData: FormData, token: string | undefined) => {
-		const projectName = formData.get('projectName');
-		const files = formData.get('files')
-     return jsonApiInstance<ResponseDto>(`/api/projects?name=${projectName}`, {
-      method: 'POST',
-			headers: {
-				Authorization: `Bearer ${token}`,
-        "X-API-KEY": process.env.BACKEND_API_KEY as string,
 
-			},
-      json: files,
-    });
-  },
 	
 	checkProjectStatus: async (projectId: number, token: string | undefined): Promise<ProjectStatusResponse> => {
     return jsonApiInstance(`/api/projects?id=${projectId}`, {
@@ -86,5 +93,4 @@ export const projectsApi = {
 		});
   }
 };
-
 

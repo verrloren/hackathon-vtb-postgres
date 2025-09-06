@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { AiOutlinePlus } from "react-icons/ai";
+import { useQueryClient } from "@tanstack/react-query";
 
 import {
   Button,
@@ -16,6 +16,10 @@ import {
   Input,
   Label,
 } from "@/shared";
+import { createProjectAction } from "@/features/projects";
+import toast from "react-hot-toast";
+import { useAuthStore } from "@/features/auth";
+import { AiOutlinePlus } from "react-icons/ai";
 
 interface PageHeaderProps {
   header: string;
@@ -23,14 +27,43 @@ interface PageHeaderProps {
 }
 
 export function PageHeader({ header, buttonText }: PageHeaderProps) {
+  const queryClient = useQueryClient();
   const [projectName, setProjectName] = useState("");
   const [connectionString, setConnectionString] = useState("");
+  const [tableName, setTableName] = useState("");
+  const userId = useAuthStore((state) => state.userId);
 
-  const handleCreateProject = () => {
-    // Dummy create handler for now
-    // Replace with actual API call/mutation later
-    // eslint-disable-next-line no-console
-    console.log("Create project clicked", { projectName, connectionString });
+  // Optional: close dialog after success by clicking the close button programmatically
+  const closeDialog = () => {
+    const btn = document.getElementById("dialog-close-button");
+    if (btn) (btn as HTMLButtonElement).click();
+  };
+
+  const handleCreateProject = async () => {
+    if (!projectName || !connectionString || !tableName) {
+      toast.error("Please fill required fields");
+      return;
+    }
+
+    const payload = {
+      connection_string: connectionString,
+      name: projectName,
+      table_name: tableName,
+      table_schema: "", // hardcoded empty string as requested
+      userId
+    };
+
+    const result = await createProjectAction(payload);
+    if (result?.success) {
+      toast.success("Project created successfully");
+      setProjectName("");
+      setConnectionString("");
+      setTableName("");
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      closeDialog();
+    } else {
+      toast.error("Failed to create project");
+    }
   };
 
   return (
@@ -46,10 +79,43 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
 
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="h-14 font-normal px-8 gap-x-4">
-            <AiOutlinePlus />
-            {buttonText}
-          </Button>
+
+				<Button className="h-14 font-normal px-8 gap-x-4">
+          <AiOutlinePlus />
+          {buttonText}
+        </Button>
+{/* <button className="bg-slate-800 no-underline group cursor-pointer relative shadow-md shadow-zinc-900 rounded-full p-px font-semibold leading-6 inline-block text-base  text-white">
+  <span className="absolute inset-0 overflow-hidden rounded-full">
+    <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+  </span>
+  <div className="relative flex px-8 space-x-2 items-center z-10 rounded-full bg-zinc-950  ring-1 ring-white/10 py-4">
+      {buttonText}
+    <svg
+      fill="none"
+      height="16"
+      viewBox="0 0 24 24"
+      width="16"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M10.75 8.75L14.25 12L10.75 15.25"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.5"
+      />
+    </svg>
+  </div>
+  <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-emerald-400/90 to-emerald-400/0 transition-opacity duration-500 group-hover:opacity-40" />
+</button> */}
+
+{/* <button className="relative inline-flex h-12 overflow-hidden rounded-full p-[1px] focus:outline-none  shadow-md text-base font-semibold text-white hover:brightness-125 transition-all">
+  <span className="absolute inset-[-1000%] animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-black text-sm font-medium text-white backdrop-blur-3xl px-8 py-4">
+    {buttonText}
+  </span>
+</button> */}
+
         </DialogTrigger>
 
         <DialogContent
@@ -59,7 +125,7 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
         >
           <DialogHeader>
             <DialogTitle className="text-white text-5xl text-center">
-              Create Project
+               New project
             </DialogTitle>
           </DialogHeader>
 
@@ -85,6 +151,18 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
                 onChange={(e) => setConnectionString(e.target.value)}
               />
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="table-name">Table name</Label>
+              <Input
+                id="table-name"
+                className="bg-neutral-900 text-white border-neutral-800 font-poppins rounded-xl placeholder:text-neutral-600 focus:bg-neutral-900 focus:border-neutral-600"
+                placeholder="orders"
+                value={tableName}
+                onChange={(e) => setTableName(e.target.value)}
+              />
+            </div>
+
           </div>
 
           <DialogFooter className="flex flex-row items-center gap-x-4">
@@ -96,7 +174,7 @@ export function PageHeader({ header, buttonText }: PageHeaderProps) {
               Cancel
             </DialogClose>
             <Button
-              className="py-6 w-full text-xl bg-green-600/75 text-white font-poppins rounded-2xl z-40 transition-colors hover:bg-green-600/90 hover:border-green-500"
+              className="py-6 w-full text-xl bg-white text-black font-poppins rounded-2xl z-40 transition-colors hover:bg-white/90 hover:border-white"
               type="submit"
               onClick={handleCreateProject}
             >
